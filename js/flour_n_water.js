@@ -11,7 +11,11 @@ $(document).ready(function(){
     
     calculateHydration: function(){
       var hydration = ((this.water + this.starterWater())/(this.flour + this.starterFlour())*100);
-      return Math.floor(hydration * 100) / 100
+      var roundedHydration =  Math.floor(hydration * 100) / 100;
+      if (isNaN(roundedHydration)){
+        return 0;
+      }
+      return roundedHydration;
     },
     
     starterFlour: function(){

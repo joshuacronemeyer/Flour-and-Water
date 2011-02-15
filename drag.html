@@ -1,0 +1,43 @@
+<html>
+<head>
+  <script src="js/jquery-1.4.4.min.js"></script>
+  <script src="js/jquery-ui-1.8.9.custom.min.js"></script>
+  <link href="css/ui-lightness/jquery-ui-1.8.9.custom.css" rel="stylesheet" type="text/css"></link>
+  <link href="css/dragable_flour_n_water.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+	<script>
+	$(function() {
+		$( ".resizable" ).resizable({
+		  maxHeight: 75,
+		  minHeight: 75,
+		  resize: function(event, ui) { 
+		    $(this).children('.quantity').text($(this).width());
+		  }
+		});
+	});
+	</script>
+
+  <div class="demo">
+	
+    <div id="flour" class="resizable highlight-box">
+      <p class="heading">Flour</p>
+    	<span id="flour-size" class="quantity">200</span><span class="unit">g</span>
+    </div>
+
+    <div id="water" class="resizable highlight-box">
+      <p class="heading">Water</p>
+    	<span id="water-size" class="quantity">200</span><span class="unit">g</span>
+    </div>
+
+    <div id="starter" class="resizable highlight-box">
+      <p class="heading">Starter@Hydration</p>
+    	<span id="starter-size" class="quantity">200</span><span class="unit">g</span>
+    	<span id="starter-hydration" class="quality">100</span><span class="unit">%</span>
+    </div>
+
+    <div class="result ui-state-disabled"><span id="result">72</span>%</div>
+
+  </div>
+</body>
+</html>

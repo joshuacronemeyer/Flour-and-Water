@@ -1,51 +1,89 @@
 <html>
 <head>
   <script src="js/jquery-1.4.4.min.js"></script>
-  <script src="js/flour_n_water.js"></script>
-  <link href="css/flour_n_water.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery-ui-1.8.9.custom.min.js"></script>
+  <link href="css/ui-lightness/jquery-ui-1.8.9.custom.css" rel="stylesheet" type="text/css"></link>
+  <link href="css/dragable_flour_n_water.css" rel="stylesheet" type="text/css"></link>
+    <script type="text/javascript" src="js/calculator.js"></script>
 </head>
 <body>
-  <div id="flour-n-water">
-    <p class="heading">Water</p>
-    <div id="water" class="normal">
-      <span class="highlight-box">
-        <span id="water-quantity" class="quantity">0</span>
-        <span class="unit">g</span>
-      </span>
-      <span id="water-control" style="display : none">
-        <span class="highlight-box">Add <input type="text" id="additional-water" value="0"></input>g Water</span>
-      </span>
+	<script>
+	function setStarterHydration(){
+	  var percentWidth = parseInt(($('#hydration').width() / $('#starter').width())*100)
+    $('#hydration').find('.quality').text(percentWidth);
+    calculator.resetHydration();
+	}
+	
+	$(function() {
+		$( "#flour" ).resizable({
+		  maxHeight: 80,
+		  minHeight: 80,
+		  resize: function(event, ui) { 
+		    $(this).find('.quantity').text($(this).width());
+		    calculator.resetHydration();
+		  }
+		});
+		
+    $( "#water" ).resizable({
+      maxHeight: 80,
+      minHeight: 80,
+      resize: function(event, ui) { 
+        $(this).find('.quantity').text($(this).width());
+        calculator.resetHydration();
+    }
+    });
+    
+    $( "#starter" ).resizable({
+      maxHeight: 80,
+      minHeight: 80,
+      alsoResize: "#hydration",
+      resize: function(event, ui) { 
+        $(this).find('.quantity').text($(this).width());
+        setStarterHydration();
+        calculator.resetHydration();
+      }
+    });
+    	
+		$( "#hydration" ).resizable({
+		  maxHeight: 80,
+		  minHeight: 80,
+		  containment: "#starter",
+		  resize: function(event, ui) {
+		    setStarterHydration();
+		  }
+		});
+	});
+	</script>
+  <div class="outer_title">
+    <div class="title center_stripe"><h1>Flour + Water =</h1></div>
+  </div>
+  <div class="outer_content">
+    <div class="content center_stripe">
+      <div id="calculator" class="demo">
+        <div id="flour" class="resizable highlight-box" style="width: 500px">
+          <p class="heading">Flour</p>
+        	<span id="flour-size" class="quantity">500</span><span class="unit">g</span>
+        </div>
+
+        <div id="water" class="resizable highlight-box" style="width: 363px">
+          <p class="heading">Water</p>
+        	<span id="water-size" class="quantity">363</span><span class="unit">g</span>
+        </div>
+
+        <div id="starter" class="resizable highlight-box" style="width: 250px">
+          <div id="hydration" class="sub_resizable sub_highlight_box" style="width: 183px">
+            <p class="heading">Starter@Hydration</p>
+          	<span id="starter-size" class="quantity">250</span><span class="unit">g</span><span id="starter-hydration" class="quality">72</span><span class="unit">%</span>
+          </div>
+        </div>
+
+        <div class="result"><span id="result">72</span>%</div>
+
+      </div>
     </div>
-    <p class="heading">Flour</p>
-    <div id="flour" class="normal">
-      <span class="highlight-box">
-        <span id="flour-quantity" class="quantity">0</span>
-        <span class="unit">g</span>
-      </span>
-      <span id="flour-control" style="display : none">
-        <span class="highlight-box">Add <input type="text" id="additional-flour" value="0"></input>g Flour</span>
-      </span>
-    </div>
-    <p class="heading">Starter@Hydration</p>
-    <div id="starter" class="normal">
-      <span class="highlight-box">
-        <span id="starter-quantity" class="quantity">0</span>
-        <span class="unit">g</span>
-        <span class="quantity">@</span>
-        <span id="starter-hydration" class="quantity">100</span>
-        <span class="unit">%</span>
-      </span>
-      <span id="starter-control" style="display : none">
-        <span class="highlight-box">Add <input type="text" id="additional-starter" value="0"></input>g Starter@<input type="text" id="new-hydration" value="100"></input>% Hydration</span>
-      </span>
-    </div>
-    <br />
-    <div id="calculate">
-      <span class="button">
-        <span class="button-text">Calculate Hydration</span>
-      </span>
-    </div>
-    <div class="result"><span id="result">0</span>%</div>
+  </div>
+  <div class="outer_foot">
+    <div class="foot center_stripe"></div>
   </div>
 </body>
 </html>

@@ -14,6 +14,14 @@
     calculator.resetHydration();
 	}
 	
+	baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water%2F&via=MakingLoaf"
+	function setTweetText(){
+	  var hydration = $("#result").text();
+	  var tweetText = "My sourdough is " + hydration + "% hydration exactly! I calculated it.";
+	  var encodedTweetText = "&text=" + encodeURIComponent(tweetText);
+	  $("iframe").attr("src", baseTwitterIframeSRC + encodedTweetText);
+	}
+	
 	$(function() {
 		$( "#flour" ).resizable({
 		  maxHeight: 80,
@@ -21,7 +29,8 @@
 		  resize: function(event, ui) { 
 		    $(this).find('.quantity').text($(this).width());
 		    calculator.resetHydration();
-		  }
+		  },
+		  stop: setTweetText
 		});
 		
     $( "#water" ).resizable({
@@ -30,7 +39,8 @@
       resize: function(event, ui) { 
         $(this).find('.quantity').text($(this).width());
         calculator.resetHydration();
-    }
+      },
+  		stop: setTweetText
     });
     
     $( "#starter" ).resizable({
@@ -41,7 +51,8 @@
         $(this).find('.quantity').text($(this).width());
         setStarterHydration();
         calculator.resetHydration();
-      }
+      },
+  		stop: setTweetText
     });
     	
 		$( "#hydration" ).resizable({
@@ -50,12 +61,13 @@
 		  containment: "#starter",
 		  resize: function(event, ui) {
 		    setStarterHydration();
-		  }
+		  },
+  		stop: setTweetText
 		});
 	});
 	</script>
   <div class="outer_title">
-    <div class="title center_stripe"><h1>Flour + Water =</h1></div>
+    <div class="title center_stripe"><div class="result">Hydration = <span id="result">72</span>%</div></div>
   </div>
   <div class="outer_content">
     <div class="content center_stripe">
@@ -75,15 +87,14 @@
             <p class="heading">Starter@Hydration</p>
           	<span id="starter-size" class="quantity">250</span><span class="unit">g</span><span id="starter-hydration" class="quality">72</span><span class="unit">%</span>
           </div>
-        </div>
-
-        <div class="result"><span id="result">72</span>%</div>
-
+        </div>  
       </div>
     </div>
   </div>
   <div class="outer_foot">
-    <div class="foot center_stripe"></div>
+    <div class="foot center_stripe">
+      <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://joshuacronemeyer.github.com/Flour-and-Water/" data-count="vertical" data-via="MakingLoaf">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div>
   </div>
 </body>
 </html>

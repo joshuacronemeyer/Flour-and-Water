@@ -31,21 +31,11 @@ body {
   border-left: 10px solid rgb(217, 150, 50); 
   border-right: 10px solid rgb(217, 150, 50); 
   background-color: rgb(255, 176, 59);
-}
-.title h1 {
-  font-size:55px;
-  padding:20px 0;
-  font-family:Georgia,serif;
-  font-size-adjust:none;
-  font-style:normal;
-  font-variant:normal;
-  font-weight:normal;
-  letter-spacing:-1px;
-  text-align:center;
-  margin:0;
+  height: 100%;
 }
 .resizable { 
   height: 80px;
+  title: "Drag edge for more or less";
 }
 .highlight-box {
   margin: 0px 0px 5px 0px;
@@ -94,6 +84,13 @@ body {
   color: #ff8b00;
 }
 .result {
-  font-size: 150px;
+  font-size:55px;
+  padding:20px 0;
+  font-family:Georgia,serif;
+  font-size-adjust:none;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  letter-spacing:-1px;
   text-align:center;
 }

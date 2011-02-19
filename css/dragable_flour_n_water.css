@@ -1,19 +1,74 @@
-.resizable { width: 200px; height: 75px; padding: 0.5em; }
-.resizable h3 { text-align: center; margin: 0; }
-.highlight-box {
-  background-color: #3c9dd0;
-  padding: 10px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
-  margin: 0px 0px 5px 0px;
-}
-input {
-  width: 4em;
-}
 body {
-  background-color: #64aad0;
-  font: helvetica;
+  padding:0;
+  margin:0;
+}
+.outer_title {
+  background-color: rgb(35, 69, 51);
+}
+.center_stripe {
+  width:90%;
+  position:relative;
+  margin:auto;
+  padding:30px;
+}
+.title {
+  background-color: rgb(70, 137, 102);
+  border-left: 10px solid rgb(60, 116, 87); 
+  border-right: 10px solid rgb(60, 116, 87);
+}
+.outer_content {
+  background-color: rgb(128, 120, 83);
+}
+.content {
+  border-left: 10px solid rgb(217, 204, 140); 
+  border-right: 10px solid rgb(217, 204, 140); 
+  background-color: rgb(255, 240, 165);
+}
+.outer_foot {
+  background-color: rgb(128, 88, 30);
+}
+.foot {
+  border-left: 10px solid rgb(217, 150, 50); 
+  border-right: 10px solid rgb(217, 150, 50); 
+  background-color: rgb(255, 176, 59);
+}
+.title h1 {
+  font-size:65px;
+  padding:25px 0;
+  font-family:Georgia,serif;
+  font-size-adjust:none;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  letter-spacing:-1px;
+  text-align:center;
+  margin:0;
+}
+.resizable { 
+  height: 90px;
+}
+.highlight-box {
+  margin: 0px 0px 5px 0px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 15px;
+  border-left: 1px solid black; 
+  border-right: 1px solid black; 
+  border-top: 1px solid black; 
+  border-bottom: 1px solid black;
+  background-color: rgb(182, 73, 38);
+}
+.sub_resizable { 
+  width: 180px; 
+  height:90px;
+}
+.sub_highlight_box {
+  border-right: 1px solid black;
+  background-color: rgb(155, 62, 32);
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-top: -10px;
+  margin-left: -10px;
 }
 .quantity {
   font-size: 50px;
@@ -25,7 +80,6 @@ body {
   font-size: 25px;
 }
 .heading {
-  color: #9303a7;
   font-size: 25px;
   margin: 0px 0px 0px 5px;
 }
@@ -40,9 +94,6 @@ body {
   color: #ff8b00;
 }
 .result {
-  color: #9303a7;
   font-size: 200px;
-  position:fixed;
-  top:75px;
-  left:500px;
+  text-align:center;
 }

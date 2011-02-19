@@ -16,8 +16,8 @@
 	
 	$(function() {
 		$( "#flour" ).resizable({
-		  maxHeight: 75,
-		  minHeight: 75,
+		  maxHeight: 80,
+		  minHeight: 80,
 		  resize: function(event, ui) { 
 		    $(this).find('.quantity').text($(this).width());
 		    calculator.resetHydration();
@@ -25,8 +25,8 @@
 		});
 		
     $( "#water" ).resizable({
-      maxHeight: 75,
-      minHeight: 75,
+      maxHeight: 80,
+      minHeight: 80,
       resize: function(event, ui) { 
         $(this).find('.quantity').text($(this).width());
         calculator.resetHydration();
@@ -34,8 +34,8 @@
     });
     
     $( "#starter" ).resizable({
-      maxHeight: 75,
-      minHeight: 75,
+      maxHeight: 80,
+      minHeight: 80,
       alsoResize: "#hydration",
       resize: function(event, ui) { 
         $(this).find('.quantity').text($(this).width());
@@ -45,8 +45,8 @@
     });
     	
 		$( "#hydration" ).resizable({
-		  maxHeight: 75,
-		  minHeight: 75,
+		  maxHeight: 80,
+		  minHeight: 80,
 		  containment: "#starter",
 		  resize: function(event, ui) {
 		    setStarterHydration();

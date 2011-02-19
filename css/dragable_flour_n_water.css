@@ -33,8 +33,8 @@ body {
   background-color: rgb(255, 176, 59);
 }
 .title h1 {
-  font-size:65px;
-  padding:25px 0;
+  font-size:55px;
+  padding:20px 0;
   font-family:Georgia,serif;
   font-size-adjust:none;
   font-style:normal;
@@ -45,7 +45,7 @@ body {
   margin:0;
 }
 .resizable { 
-  height: 90px;
+  height: 80px;
 }
 .highlight-box {
   margin: 0px 0px 5px 0px;
@@ -60,7 +60,7 @@ body {
 }
 .sub_resizable { 
   width: 180px; 
-  height:90px;
+  height:80px;
 }
 .sub_highlight_box {
   border-right: 1px solid black;
@@ -71,10 +71,10 @@ body {
   margin-left: -10px;
 }
 .quantity {
-  font-size: 50px;
+  font-size: 40px;
 }
 .quality {
-  font-size: 50px;
+  font-size: 40px;
 }
 .unit {
   font-size: 25px;
@@ -94,6 +94,6 @@ body {
   color: #ff8b00;
 }
 .result {
-  font-size: 200px;
+  font-size: 150px;
   text-align:center;
 }

@@ -1,15 +1,24 @@
-body {
+html, body {
+  height: 100%; 
   padding:0;
   margin:0;
+}
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -100px;
+}
+.foot, 
+.push {
+    height: 100px;   
 }
 .outer_title {
   background-color: rgb(35, 69, 51);
 }
 .center_stripe {
   width:90%;
-  position:relative;
   margin:auto;
-  padding:30px;
 }
 .title {
   background-color: rgb(70, 137, 102);
@@ -23,22 +32,24 @@ body {
   border-left: 10px solid rgb(217, 204, 140); 
   border-right: 10px solid rgb(217, 204, 140); 
   background-color: rgb(255, 240, 165);
+  padding-bottom: 150px;
+  padding-top: 50px;
 }
 .outer_foot {
   background-color: rgb(128, 88, 30);
 }
 .foot {
+  padding-top: -200px;
   border-left: 10px solid rgb(217, 150, 50); 
   border-right: 10px solid rgb(217, 150, 50); 
   background-color: rgb(255, 176, 59);
-  height: 100%;
 }
 .resizable { 
   height: 80px;
   title: "Drag edge for more or less";
 }
 .highlight-box {
-  margin: 0px 0px 5px 0px;
+  margin: 0px 0px 10px 0px;
   padding-left: 10px;
   padding-top: 10px;
   padding-right: 15px;
@@ -84,8 +95,8 @@ body {
   color: #ff8b00;
 }
 .result {
-  font-size:55px;
-  padding:20px 0;
+  font-size:65px;
+  padding:0 0;
   font-family:Georgia,serif;
   font-size-adjust:none;
   font-style:normal;

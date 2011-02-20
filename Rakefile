@@ -18,6 +18,11 @@ task :deploy do |t|
   `cp -r public/ tmp`
   `git checkout gh-pages`
   `git pull origin gh-pages`
-  old_files = FileList["**/*"].exclude("tmp")
-  puts old_files
+  FileList["**/*"].exclude("tmp").each {|file| `rm -rf #{file}`}
+  `cp -r tmp/* .`
+  `rm -rf tmp`
+  `git add .`
+  `git ci -m "deploy latest changes"`
+  `git push origin gh-pages`
+  `git checkout master`
 end

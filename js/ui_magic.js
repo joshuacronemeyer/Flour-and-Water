@@ -23,7 +23,7 @@ function setStarterHydration(){
   calculator.resetHydration();
 }
 
-baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water%2F&via=MakingLoaf"
+baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water&via=MakingLoaf"
 function setTweetText(){
   var hydration = $("#result").text();
   var tweetText = "My sourdough is " + hydration + "% hydration exactly! I calculated it with this:";
@@ -52,6 +52,7 @@ function resizeableParams(updateCallback){
   }
 }
 $(function() {
+  setTweetText();
   $("#info").click(function(){$("#overlay").show();});
   $("#overlay").click(function(){
     if ($("#overlay").not(":visible")) {

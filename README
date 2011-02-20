@@ -1,1 +1,15 @@
-Flour and Water.  Just playing around with JS to make a calculator for home bakers.  Currently just trying out some different UI ideas.  Once I have something I like then I'll build it for real.  Current best idea is the drag.html one.  The other index.html effort is just too clunky with all those hidden fields.  Not intuitive enough.  The tricky thing I still need to figure out is on the starter.  I have to be able to change the 2 values, not just one.  Was thinking of superimposing boxes one is a % size of the other.  Both are draggable.  Seems doable.
+// Hydration = x is a web based calculator for sourdough bakers.
+// Copyright (C) 2011  Josh Cronemeyer
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.

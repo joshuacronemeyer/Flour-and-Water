@@ -24,6 +24,27 @@ html, body {
   height: 100px;
 }
 
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    background-color: #FFF;
+    -moz-opacity: 0.9;
+    opacity: .90;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+
+#overlay-content {
+  padding: 10% 20% 0% 20%;
+}
+#overlay-content p, h1, h2{
+  color: black;
+}
+
 .control {
   padding-top: 20px;
   padding-bottom: 20px;

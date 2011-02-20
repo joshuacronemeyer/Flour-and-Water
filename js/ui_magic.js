@@ -21,6 +21,7 @@ function setStarterHydration(){
   var percentWidth = parseInt(($('#hydration').width() / $('#starter').width())*100)
   $('#hydration').find('.quality').text(percentWidth);
   calculator.resetHydration();
+  $("#info-result").text($("#result").text());
 }
 
 baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water&via=MakingLoaf"
@@ -41,6 +42,7 @@ function updateStarterAndHydration() {
   $(this).find('.quantity').text($(this).width());
   setStarterHydration();
   calculator.resetHydration();
+  $("#info-result").text($("#result").text());
 }
 
 function resizeableParams(updateCallback){ 

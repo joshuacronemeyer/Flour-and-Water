@@ -17,25 +17,24 @@
 // For more information please visit the project on github: 
 // https://github.com/joshuacronemeyer/Flour-and-Water
 
-
-function integerInput(selector){
-  return parseInt($(selector).text());
-}
-
 function HydrationCalculator(flour, water, starter, starterHydration) {
-  this.flour = integerInput('#flour-size'),
-  this.water = integerInput('#water-size'),
-  this.starter = integerInput('#starter-size'),
-  this.starterHydration = integerInput('#starter-hydration')
+  this.flour = flour;
+  this.water = water;
+  this.starter = starter;
+  this.starterHydration = starterHydration;
 }
 
 HydrationCalculator.prototype.calculateHydration = function() {
   var hydration = (((this.water + this.starterWater())/(this.flour + this.starterFlour()))*100);
-  var roundedHydration =  Math.round(hydration);
-  if (isNaN(roundedHydration)){
-    return 0;
+  return this._round(hydration);
+}
+
+HydrationCalculator.prototype._round = function(decimal) {
+  var roundedDecimal =  Math.round(decimal);
+  if (isNaN(roundedDecimal)){
+   return 0;
   }
-  return roundedHydration;
+  return roundedDecimal;
 }
 
 HydrationCalculator.prototype.starterFlour = function() {
@@ -44,16 +43,4 @@ HydrationCalculator.prototype.starterFlour = function() {
 
 HydrationCalculator.prototype.starterWater = function() {
   return this.starter - this.starterFlour();
-}
-
-HydrationCalculator.prototype.reload = function() {
-  this.flour = integerInput('#flour-size');
-  this.water = integerInput('#water-size');
-  this.starter = integerInput('#starter-size');
-  this.starterHydration = integerInput('#starter-hydration');
-}
-  
-HydrationCalculator.prototype.resetHydration = function() {
-  this.reload();
-  $('#result').text(this.calculateHydration());
 }

@@ -17,11 +17,27 @@
 // For more information please visit the project on github: 
 // https://github.com/joshuacronemeyer/Flour-and-Water
 
+// 
+
+function integerInput(selector){
+  return parseInt($(selector).text());
+}
+  
+calculator = function() {
+  return new HydrationCalculator(
+    integerInput('#flour-size'), 
+    integerInput('#water-size'), 
+    integerInput('#starter-size'), 
+    integerInput('#starter-hydration')
+    );
+}
+
 function setStarterHydration(){
   var percentWidth = parseInt(($('#hydration').width() / $('#starter').width())*100)
   $('#hydration').find('.quality').text(percentWidth);
-  calculator.resetHydration();
-  $("#info-result").text($("#result").text());
+  var newHydration = calculator().calculateHydration();
+  $('#result').text(newHydration);
+  $("#info-result").text(newHydration);
 }
 
 baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water&via=MakingLoaf"
@@ -34,15 +50,17 @@ function setTweetText(){
 
 function updateHydration() {
   $(this).find('.quantity').text($(this).width());
-  calculator.resetHydration();
-  $("#info-result").text($("#result").text());
+  var newHydration = calculator().calculateHydration();
+  $('#result').text(newHydration);
+  $("#info-result").text(newHydration);
 }
 
 function updateStarterAndHydration() { 
   $(this).find('.quantity').text($(this).width());
   setStarterHydration();
-  calculator.resetHydration();
-  $("#info-result").text($("#result").text());
+  var newHydration = calculator().calculateHydration();
+  $('#result').text(newHydration);
+  $("#info-result").text(newHydration);
 }
 
 function resizeableParams(updateCallback){ 

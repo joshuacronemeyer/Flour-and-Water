@@ -5,54 +5,34 @@
   <script src="../public/js/jquery-1.4.4.min.js"></script>
   <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
   <script type="text/javascript" src="qunit.js"></script>
-  <script type="text/javascript" src="../public/js/calculator.js"></script>
+  <script type="text/javascript" src="../public/js/hydration_calculator.js"></script>
 
   <script>
-    function setAmounts(flour, water, starter, hydration){
-      $('#flour-size').text(flour);
-      $('#water-size').text(water);
-      $('#starter-size').text(starter);
-      $('#starter-hydration').text(hydration);
-    }
-    
     $(document).ready(function(){
     
       test("calculate 50% hydration plus 50% hydration starter", function(){
-        setAmounts(200, 100, 99, 50);
-        calculator.reload();
+        var calculator = new HydrationCalculator(200, 100, 99, 50);
         equals(calculator.calculateHydration(), 50, "We expect 50 percent hydration" );
       });
       
       test("calculate 0% hydration plus 75% hydration starter", function(){
-        setAmounts(0, 0, 1, 75);
-        calculator.reload();
+        var calculator = new HydrationCalculator(0, 0, 1, 75);
         equals(calculator.calculateHydration(), 75, "We expect 75 percent hydration" );
       });
       
       test("calculate 100% hydration", function() {
-        setAmounts(250, 250, 250, 100);
-        calculator.reload();
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
         equals(calculator.calculateHydration(), 100, "We expect 100 percent hydration" );
       });
       
       test("calculate no hydration", function() {
-        setAmounts(250, 0, 0, 100);
-        calculator.reload();
+        var calculator = new HydrationCalculator(250, 0, 0, 100);
         equals(calculator.calculateHydration(), 0, "We expect 0 percent hydration" );
       });
       
       test("calculate round up to nearest whole", function() {
-        setAmounts(233, 123, 0, 100);
-        calculator.reload();
+        var calculator = new HydrationCalculator(233, 123, 0, 100);
         equals(calculator.calculateHydration(), 53, "We expect 53 percent hydration" );
-      });
-      
-      test("resetHydration works", function() {
-        $('#result').text(0);
-        setAmounts(2, 1, 0, 100);
-        calculator.reload();
-        calculator.resetHydration();
-        equals($('#result').text(), 50, "We expect 50 percent hydration" );
       });
       
     });
@@ -66,11 +46,6 @@
   <h2 id="qunit-userAgent"></h2>
   <ol id="qunit-tests"></ol>
   <div id="qunit-fixture">
-    <span id="flour-size">250</span>
-    <span id="water-size">250</span>
-    <span id="starter-size">250</span>
-    <span id="starter-hydration">100</span>
-    <span id="result">0</span>
   </div>
 </body>
 </html>

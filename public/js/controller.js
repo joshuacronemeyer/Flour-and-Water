@@ -53,16 +53,3 @@ function resizeableParams(updateCallback){
 	  stop: setTweetText
   }
 }
-$(function() {
-  setTweetText();
-  $("#info").click(function(){$("#overlay").show();});
-  $("#overlay").click(function(){
-    if ($("#overlay").not(":visible")) {
-      $("#overlay").hide();
-    }
-  });
-  $("#flour").resizable(resizeableParams(updateHydration));
-  $("#water").resizable(resizeableParams(updateHydration));
-  $("#starter").resizable($.extend(resizeableParams(updateStarterAndHydration), {alsoResize: "#hydration"}));
-	$("#hydration").resizable($.extend(resizeableParams(setStarterHydration), {containment: "#starter"}));
-});

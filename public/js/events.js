@@ -25,8 +25,8 @@ $(function() {
       $("#overlay").hide();
     }
   });
-  $("#flour").resizable(resizeableParams(updateHydration));
-  $("#water").resizable(resizeableParams(updateHydration));
-  $("#starter").resizable($.extend(resizeableParams(updateStarterAndHydration), {alsoResize: "#hydration"}));
-	$("#hydration").resizable($.extend(resizeableParams(setStarterHydration), {containment: "#starter"}));
+  $("#flour").resizable(resizeableParams(theFlourChanged));
+  $("#water").resizable(resizeableParams(theWaterChanged));
+  $("#starter").resizable($.extend(resizeableParams(theStarterChanged), {alsoResize: "#hydration"}));
+	$("#hydration").resizable($.extend(resizeableParams(theStarterHydrationChanged), {containment: "#starter"}));
 });

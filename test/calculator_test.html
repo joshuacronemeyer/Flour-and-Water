@@ -35,6 +35,11 @@
         equals(calculator.calculateHydration(), 53, "We expect 53 percent hydration" );
       });
       
+      test("calculate weight", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        equals(calculator.calculateWeight(), 750, "We expect 750g total weight")
+      });
+      
     });
   </script> 
 </head>

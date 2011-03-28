@@ -18,33 +18,36 @@
         equals($("#starter-hydration").text(),calculator().starterHydration);
       });
       
-      test("theWaterChanged method updates the water and hydration", function(){
+      test("theWaterChanged method updates the water, weight and hydration", function(){
         $("#water").width(200);
         theWaterChanged();
-        equals($("#water-size").text(), "200")
-        equals($("#result").text(), "87")
+        equals($("#water-size").text(), "200");
+        equals($("#dough-weight").text(), "700");
+        equals($("#result").text(), "87");
       });
       
-      test("theFlourChanged method updates the flour and hydration", function(){
+      test("theFlourChanged method updates the flour, weight and hydration", function(){
         $("#flour").width(300);
         theFlourChanged();
-        equals($("#flour-size").text(), "300")
-        equals($("#result").text(), "88")
+        equals($("#flour-size").text(), "300");
+        equals($("#dough-weight").text(), "800");
+        equals($("#result").text(), "88");
       });
       
-      test("theStarterChanged method updates the starter, starterHydration and hydration", function(){
+      test("theStarterChanged method updates the starter, starterHydration, weight and hydration", function(){
         $("#starter").width(300);
         theStarterChanged();
-        equals($("#starter-size").text(), "300")
-        equals($("#starter-hydration").text(), "83")
-        equals($("#result").text(), "93")
+        equals($("#starter-size").text(), "300");
+        equals($("#starter-hydration").text(), "83");
+        equals($("#dough-weight").text(), "800");
+        equals($("#result").text(), "93");
       });
       
       test("theStarterHydrationChanged method updates the starterHydration and hydration", function(){
         $("#hydration").width(200);
         theStarterHydrationChanged();
-        equals($("#starter-hydration").text(), "80")
-        equals($("#result").text(), "93")
+        equals($("#starter-hydration").text(), "80");
+        equals($("#result").text(), "93");
       });
       
       test("setTweetText updates the tweet text with new hydration calculation", function(){
@@ -74,6 +77,7 @@
     <span id="hydration" style="width: 250px"></span>
     <span id="starter-hydration">100</span>
     <span id="result">0</span>
+    <span id="dough-weight">750</span>
     <iframe src=""></iframe>
   </div>
 </body>

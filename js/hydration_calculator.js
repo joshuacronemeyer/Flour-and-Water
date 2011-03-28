@@ -29,6 +29,10 @@ HydrationCalculator.prototype.calculateHydration = function() {
   return this._round(hydration);
 }
 
+HydrationCalculator.prototype.calculateWeight = function() {
+  return this.flour + this.water + this.starter;
+}
+
 HydrationCalculator.prototype._round = function(decimal) {
   var roundedDecimal =  Math.round(decimal);
   if (isNaN(roundedDecimal)){

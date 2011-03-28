@@ -42,18 +42,18 @@ function setTweetText(){
 
 function theWaterChanged() {
   $("#water-size").text($("#water").width());
-  calculateAndSetHydration();
+  calculateAndSetHydrationAndWeight();
 }
 
 function theFlourChanged() {
   $("#flour-size").text($("#flour").width());
-  calculateAndSetHydration();
+  calculateAndSetHydrationAndWeight();
 }
 
 function theStarterChanged() { 
   $("#starter-size").text($("#starter").width());
   theStarterHydrationChanged();
-  calculateAndSetHydration();
+  calculateAndSetHydrationAndWeight();
 }
 
 function theStarterHydrationChanged(){
@@ -66,6 +66,11 @@ function calculateAndSetHydration() {
   var newHydration = calculator().calculateHydration();
   $('#result').text(newHydration);
   $("#info-result").text(newHydration);
+}
+
+function calculateAndSetHydrationAndWeight() {
+  calculateAndSetHydration();
+  $('#dough-weight').text(calculator().calculateWeight());
 }
 
 function resizeableParams(updateCallback){ 

@@ -10,7 +10,8 @@
 
   <script>
     $(document).ready(function(){
-    
+      module( "setup calculator global", {setup: function() { resetCalculator(); }});
+      
       test("calculator method creates calculator with correct attributes", function(){
         equals($("#flour-size").text(),calculator().flour);
         equals($("#water-size").text(),calculator().water);

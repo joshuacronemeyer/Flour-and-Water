@@ -24,12 +24,19 @@ function HydrationCalculator(flour, water, starter, starterHydration) {
   this.starterHydration = starterHydration;
 }
 
-HydrationCalculator.prototype.calculateHydration = function() {
+HydrationCalculator.prototype.update = function(changes) {
+  if (changes.water != undefined) { this.water = changes.water; }
+  if (changes.flour != undefined) { this.flour = changes.flour; }
+  if (changes.starter != undefined) { this.starter = changes.starter; }
+  if (changes.starterHydration != undefined) { this.starterHydration = changes.starterHydration; }
+}
+
+HydrationCalculator.prototype.hydration = function() {
   var hydration = (((this.water + this.starterWater())/(this.flour + this.starterFlour()))*100);
   return this._round(hydration);
 }
 
-HydrationCalculator.prototype.calculateWeight = function() {
+HydrationCalculator.prototype.weight = function() {
   return this.flour + this.water + this.starter;
 }
 

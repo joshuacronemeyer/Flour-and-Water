@@ -12,32 +12,60 @@
     
       test("calculate 50% hydration plus 50% hydration starter", function(){
         var calculator = new HydrationCalculator(200, 100, 99, 50);
-        equals(calculator.calculateHydration(), 50, "We expect 50 percent hydration" );
+        equals(calculator.hydration(), 50, "We expect 50 percent hydration" );
       });
       
       test("calculate 0% hydration plus 75% hydration starter", function(){
         var calculator = new HydrationCalculator(0, 0, 1, 75);
-        equals(calculator.calculateHydration(), 75, "We expect 75 percent hydration" );
+        equals(calculator.hydration(), 75, "We expect 75 percent hydration" );
       });
       
       test("calculate 100% hydration", function() {
         var calculator = new HydrationCalculator(250, 250, 250, 100);
-        equals(calculator.calculateHydration(), 100, "We expect 100 percent hydration" );
+        equals(calculator.hydration(), 100, "We expect 100 percent hydration" );
       });
       
       test("calculate no hydration", function() {
         var calculator = new HydrationCalculator(250, 0, 0, 100);
-        equals(calculator.calculateHydration(), 0, "We expect 0 percent hydration" );
+        equals(calculator.hydration(), 0, "We expect 0 percent hydration" );
       });
       
       test("calculate round up to nearest whole", function() {
         var calculator = new HydrationCalculator(233, 123, 0, 100);
-        equals(calculator.calculateHydration(), 53, "We expect 53 percent hydration" );
+        equals(calculator.hydration(), 53, "We expect 53 percent hydration" );
       });
       
       test("calculate weight", function() {
         var calculator = new HydrationCalculator(250, 250, 250, 100);
-        equals(calculator.calculateWeight(), 750, "We expect 750g total weight")
+        equals(calculator.weight(), 750, "We expect 750g total weight");
+      });
+      
+      test("adding water works", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"water":200})
+        equals(calculator.hydration(), 87, "We expect 87 percent hydration" );
+        equals(calculator.weight(), 700, "We expect 700g total weight");
+      });
+      
+      test("adding flour works", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"flour":300})
+        equals(calculator.hydration(), 88, "We expect 88 percent hydration" );
+        equals(calculator.weight(), 800, "We expect 800g total weight");
+      });
+      
+      test("adding starter works", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"starter":300})
+        equals(calculator.hydration(), 100, "We expect 100 percent hydration" );
+        equals(calculator.weight(), 800, "We expect 800g total weight");
+      });
+      
+      test("adding starterHydration works", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"starterHydration":50})
+        equals(calculator.hydration(), 80, "We expect 80 percent hydration" );
+        equals(calculator.weight(), 750, "We expect 800g total weight");
       });
       
     });

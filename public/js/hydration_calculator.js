@@ -22,13 +22,16 @@ function HydrationCalculator(flour, water, starter, starterHydration) {
   this.water = water;
   this.starter = starter;
   this.starterHydration = starterHydration;
+  this.hydrationLock = false;
 }
 
 HydrationCalculator.prototype.update = function(changes) {
-  if (changes.water != undefined) { this.water = changes.water; }
-  if (changes.flour != undefined) { this.flour = changes.flour; }
-  if (changes.starter != undefined) { this.starter = changes.starter; }
-  if (changes.starterHydration != undefined) { this.starterHydration = changes.starterHydration; }
+  if (changes.hydrationLock != undefined) { this.hydrationLock = changes.hydrationLock; }
+  var originalThis = jQuery.extend({}, this);
+  this._updateAllQuantities(changes);
+  if (this.hydrationLock) {
+    this._compensateToMaintainHydration(originalThis);
+  }
 }
 
 HydrationCalculator.prototype.hydration = function() {
@@ -54,4 +57,25 @@ HydrationCalculator.prototype.starterFlour = function() {
 
 HydrationCalculator.prototype.starterWater = function() {
   return this.starter - this.starterFlour();
+}
+
+HydrationCalculator.prototype._updateAllQuantities = function(changes) {
+  if (changes.water != undefined) { this.water = changes.water; }
+  if (changes.flour != undefined) { this.flour = changes.flour; }
+  if (changes.starter != undefined) { this.starter = changes.starter; }
+  if (changes.starterHydration != undefined) { this.starterHydration = changes.starterHydration; }
+}
+
+HydrationCalculator.prototype._diff = function(thatCalculator) {
+    console.log(thatCalculator);
+  return {
+    "flour" : this.flour - thatCalculator.flour,
+    "water" : this.water - thatCalculator.water 
+  };
+}
+
+HydrationCalculator.prototype._compensateToMaintainHydration = function(thatCalculator) {
+  var diff = this._diff(thatCalculator);
+  this.flour = this.flour + diff.water;
+  this.water = this.water + diff.flour;
 }

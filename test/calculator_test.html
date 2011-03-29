@@ -68,6 +68,19 @@
         equals(calculator.weight(), 750, "We expect 800g total weight");
       });
       
+      test("adding water with locked hydration increases flour", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"water":200, "hydrationLock":true})
+        equals(calculator.hydration(), 100, "We expect 100 percent hydration" );
+        equals(calculator.flour, 200, "We expect 200g flour");
+      });
+      
+      test("adding flour with locked hydration increases water", function() {
+        var calculator = new HydrationCalculator(250, 250, 250, 100);
+        calculator.update({"flour":300, "hydrationLock":true})
+        equals(calculator.hydration(), 100, "We expect 100 percent hydration" );
+        equals(calculator.water, 300, "We expect 300g total water");
+      });
     });
   </script> 
 </head>

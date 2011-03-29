@@ -58,6 +58,12 @@
         equals($("iframe").attr("src").indexOf(expectedText) > -1, true, "We expect the tweet text to match this url");
       });
       
+      test("toggleLock updates lock element", function(){
+        equals($("#lock").hasClass("hydrationUnlocked"), true);
+        toggleLock();
+        equals($("#lock").hasClass("hydrationUnlocked"), false);
+      });
+      
     });
   </script> 
 </head>
@@ -69,6 +75,7 @@
   <h2 id="qunit-userAgent"></h2>
   <ol id="qunit-tests"></ol>
   <div id="qunit-fixture">
+    <span id="lock" class="hydrationUnlocked"></span>
     <span id="flour-size">250</span>
     <span id="flour" style="width: 250px"></span>
     <span id="water-size">250</span>

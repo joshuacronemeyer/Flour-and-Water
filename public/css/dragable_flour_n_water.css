@@ -75,6 +75,11 @@ html, body {
   background-color: #8ABD50;
 }
 
+.hydrationUnlocked {
+  opacity:0.1;
+  filter:alpha(opacity=10);
+}
+
 .sub_resizable { 
   border-right: 1px solid black;
   width: 180px; 

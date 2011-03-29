@@ -85,6 +85,10 @@ function calculateAndSetHydrationAndWeight(changes) {
   $('#dough-weight').text(hydrationCalculator.weight());
 }
 
+function toggleLock() {
+  $('#lock').toggleClass("hydrationUnlocked");
+}
+
 function resizeableParams(updateCallback){ 
   return {
     maxHeight: 80,

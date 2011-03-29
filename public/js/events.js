@@ -20,6 +20,7 @@
 $(function() {
   resetCalculator();
   setTweetText();
+  $("#lock").click(toggleLock);
   $("#info").click(function(){$("#overlay").show();});
   $("#overlay").click(function(){
     if ($("#overlay").not(":visible")) {

@@ -75,6 +75,15 @@ html, body {
   background-color: #8ABD50;
 }
 
+.assorted-calculations {
+  list-style: none;
+}
+
+.assorted-calculations li{
+  display: inline;
+  margin-right: 10px;
+}
+
 .hydrationUnlocked {
   opacity:0.1;
   filter:alpha(opacity=10);

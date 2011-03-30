@@ -27,28 +27,21 @@ function HydrationCalculator(flour, water, starter, starterHydration) {
 
 HydrationCalculator.prototype.update = function(changes) {
   if (changes.hydrationLock != undefined) { this.hydrationLock = changes.hydrationLock; }
-  var originalThis = jQuery.extend({}, this);
-  this._updateAllQuantities(changes);
+  // var originalThis = jQuery.extend({}, this);
+  //   this._updateAllQuantities(changes);
   if (this.hydrationLock) {
-    this._compensateToMaintainHydration(originalThis);
+    this._compensateToMaintainHydration(changes);
+  } else {
+    this._updateAllQuantities(changes);
   }
 }
 
 HydrationCalculator.prototype.hydration = function() {
-  var hydration = (((this.water + this.starterWater())/(this.flour + this.starterFlour()))*100);
-  return this._round(hydration);
+  return this._round(this._hydration());
 }
 
 HydrationCalculator.prototype.weight = function() {
   return this.flour + this.water + this.starter;
-}
-
-HydrationCalculator.prototype._round = function(decimal) {
-  var roundedDecimal =  Math.round(decimal);
-  if (isNaN(roundedDecimal)){
-   return 0;
-  }
-  return roundedDecimal;
 }
 
 HydrationCalculator.prototype.starterFlour = function() {
@@ -59,6 +52,26 @@ HydrationCalculator.prototype.starterWater = function() {
   return this.starter - this.starterFlour();
 }
 
+HydrationCalculator.prototype.recommendedSalt = function() {
+  return this._round(this.weight()*0.011);
+}
+
+HydrationCalculator.prototype.percentStarter = function() {
+  return this._round((this.starter/this.weight())*100);
+}
+
+HydrationCalculator.prototype._hydration = function() {
+  return (((this.water + this.starterWater())/(this.flour + this.starterFlour()))*100);
+}
+
+HydrationCalculator.prototype._round = function(decimal) {
+  var roundedDecimal =  Math.round(decimal);
+  if (isNaN(roundedDecimal)){
+   return 0;
+  }
+  return roundedDecimal;
+}
+
 HydrationCalculator.prototype._updateAllQuantities = function(changes) {
   if (changes.water != undefined) { this.water = changes.water; }
   if (changes.flour != undefined) { this.flour = changes.flour; }
@@ -66,16 +79,27 @@ HydrationCalculator.prototype._updateAllQuantities = function(changes) {
   if (changes.starterHydration != undefined) { this.starterHydration = changes.starterHydration; }
 }
 
-HydrationCalculator.prototype._diff = function(thatCalculator) {
-    console.log(thatCalculator);
-  return {
-    "flour" : this.flour - thatCalculator.flour,
-    "water" : this.water - thatCalculator.water 
-  };
+HydrationCalculator.prototype._compensateToMaintainHydration = function(changes) {
+  var calculatedHydration = this.hydration();
+  if (changes.water != undefined) { 
+    this.water = changes.water;
+    this._balanceFlour(calculatedHydration); 
+  }
+  if (changes.flour != undefined) { 
+    this.flour = changes.flour;
+    this._balanceWater(calculatedHydration);
+  }
 }
 
-HydrationCalculator.prototype._compensateToMaintainHydration = function(thatCalculator) {
-  var diff = this._diff(thatCalculator);
-  this.flour = this.flour + diff.water;
-  this.water = this.water + diff.flour;
+HydrationCalculator.prototype._balanceFlour = function(calculatedHydration){
+  console.log(this);
+  console.log(calculatedHydration);
+  console.log(this.starterWater());
+  console.log(this.starterFlour());
+  this.flour = this._round(((this.water + this.starterWater())/(calculatedHydration/100)) - this.starterFlour());
+  console.log(this.flour);
+}
+    
+HydrationCalculator.prototype._balanceWater = function(calculatedHydration){
+  this.water = this._round(((calculatedHydration/100)*(this.flour + this.starterFlour()))-this.starterWater());
 }

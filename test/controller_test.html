@@ -3,6 +3,7 @@
 <html>
 <head>
   <script src="../public/js/jquery-1.4.4.min.js"></script>
+  <script src="../public/js/jquery-ui-1.8.9.custom.min.js"></script>
   <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
   <script type="text/javascript" src="qunit.js"></script>
   <script type="text/javascript" src="../public/js/hydration_calculator.js"></script>
@@ -10,15 +11,10 @@
 
   <script>
     $(document).ready(function(){
+      $("#starter").resizable({maxHeight: 80,minHeight: 80});
+      $("#hydration").resizable({maxHeight: 80, minHeight: 80, resize: function(){}});
       module( "setup calculator global", {setup: function() { resetCalculator(); }});
-      
-      test("calculator method creates calculator with correct attributes", function(){
-        equals($("#flour-size").text(),calculator().flour);
-        equals($("#water-size").text(),calculator().water);
-        equals($("#starter-size").text(),calculator().starter);
-        equals($("#starter-hydration").text(),calculator().starterHydration);
-      });
-      
+
       test("theWaterChanged method updates the water, weight and hydration", function(){
         $("#water").width(200);
         theWaterChanged();
@@ -41,6 +37,8 @@
         equals($("#starter-size").text(), "300");
         equals($("#starter-hydration").text(), "83");
         equals($("#dough-weight").text(), "800");
+        equals($("#salt-weight").text(), "9");
+        equals($("#starter-percent").text(), "38");
         equals($("#result").text(), "93");
       });
       
@@ -62,8 +60,17 @@
         equals($("#lock").hasClass("hydrationUnlocked"), true);
         toggleLock();
         equals($("#lock").hasClass("hydrationUnlocked"), false);
+        equals(hydrationIsLocked(), true);
       });
       
+      test("adding flour updates water but not hydration when locked", function(){
+        toggleLock();
+        $("#flour").width(300);
+        theFlourChanged();
+        equals($("#flour-size").text(), 300);
+        equals($("#water-size").text(), 300);
+        equals($("#result").text(), "100");
+      });
     });
   </script> 
 </head>
@@ -86,6 +93,8 @@
     <span id="starter-hydration">100</span>
     <span id="result">0</span>
     <span id="dough-weight">750</span>
+    <span id="salt-weight">0</span>
+    <span id="starter-percent">0</span>
     <iframe src=""></iframe>
   </div>
 </body>

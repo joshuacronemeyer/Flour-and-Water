@@ -36,15 +36,6 @@ function resetCalculator(){
     );
 }
 
-calculator = function() {
-  return new HydrationCalculator(
-     textAsInt('#flour-size'), 
-     textAsInt('#water-size'), 
-     textAsInt('#starter-size'), 
-     textAsInt('#starter-hydration')
-    );
-}
-
 baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water&via=MakingLoaf"
 function setTweetText(){
   var hydration = $("#result").text();
@@ -57,12 +48,20 @@ function theWaterChanged() {
   var water =  $("#water").width();
   $("#water-size").text(water);
   calculateAndSetHydrationAndWeight({"water": water});
+  if (hydrationIsLocked()){
+    $('#flour').width(hydrationCalculator.flour);
+    $("#flour-size").text($("#flour").width());
+  }
 }
 
 function theFlourChanged() {
   var flour =  $("#flour").width();
   $("#flour-size").text(flour);
   calculateAndSetHydrationAndWeight({"flour": flour});
+  if (hydrationIsLocked()){
+    $('#water').width(hydrationCalculator.water);
+    $("#water-size").text($("#water").width());
+  }
 }
 
 function theStarterChanged() { 
@@ -79,14 +78,22 @@ function theStarterHydrationChanged(){
 }
 
 function calculateAndSetHydrationAndWeight(changes) {
-  hydrationCalculator.update(changes);
+  hydrationCalculator.update($.extend(changes, {"hydrationLock": hydrationIsLocked()}));
   $('#result').text(hydrationCalculator.hydration());
   $("#info-result").text(hydrationCalculator.hydration());
   $('#dough-weight').text(hydrationCalculator.weight());
+  $('#salt-weight').text(hydrationCalculator.recommendedSalt());
+  $('#starter-percent').text(hydrationCalculator.percentStarter());
+}
+
+function hydrationIsLocked() {
+  return !$('#lock').hasClass("hydrationUnlocked");
 }
 
 function toggleLock() {
   $('#lock').toggleClass("hydrationUnlocked");
+  $("#hydration").resizable( "option", "disabled", hydrationIsLocked() );
+  $("#starter").resizable( "option", "disabled", hydrationIsLocked() );
 }
 
 function resizeableParams(updateCallback){ 

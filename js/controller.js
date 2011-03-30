@@ -19,16 +19,20 @@
 
 // 
 
-function integerInput(selector){
+function  textAsInt(selector){
   return parseInt($(selector).text());
 }
-  
-calculator = function() {
-  return new HydrationCalculator(
-    integerInput('#flour-size'), 
-    integerInput('#water-size'), 
-    integerInput('#starter-size'), 
-    integerInput('#starter-hydration')
+
+function  widthAsInt(selector){
+  return parseInt($(selector).width());
+}
+
+function resetCalculator(){
+  hydrationCalculator = new HydrationCalculator(
+     textAsInt('#flour-size'), 
+     textAsInt('#water-size'), 
+     textAsInt('#starter-size'), 
+     textAsInt('#starter-hydration')
     );
 }
 
@@ -41,36 +45,55 @@ function setTweetText(){
 }
 
 function theWaterChanged() {
-  $("#water-size").text($("#water").width());
-  calculateAndSetHydrationAndWeight();
+  var water =  $("#water").width();
+  $("#water-size").text(water);
+  calculateAndSetHydrationAndWeight({"water": water});
+  if (hydrationIsLocked()){
+    $('#flour').width(hydrationCalculator.flour);
+    $("#flour-size").text($("#flour").width());
+  }
 }
 
 function theFlourChanged() {
-  $("#flour-size").text($("#flour").width());
-  calculateAndSetHydrationAndWeight();
+  var flour =  $("#flour").width();
+  $("#flour-size").text(flour);
+  calculateAndSetHydrationAndWeight({"flour": flour});
+  if (hydrationIsLocked()){
+    $('#water').width(hydrationCalculator.water);
+    $("#water-size").text($("#water").width());
+  }
 }
 
 function theStarterChanged() { 
-  $("#starter-size").text($("#starter").width());
+  var starter =  $("#starter").width();
+  $("#starter-size").text(starter);
   theStarterHydrationChanged();
-  calculateAndSetHydrationAndWeight();
+  calculateAndSetHydrationAndWeight({"starter": starter});
 }
 
 function theStarterHydrationChanged(){
   var percentHydration = parseInt(($('#hydration').width() / $('#starter').width())*100)
   $('#starter-hydration').text(percentHydration);
-  calculateAndSetHydration();
+  calculateAndSetHydrationAndWeight({"starterHydration": percentHydration});
 }
 
-function calculateAndSetHydration() {
-  var newHydration = calculator().calculateHydration();
-  $('#result').text(newHydration);
-  $("#info-result").text(newHydration);
+function calculateAndSetHydrationAndWeight(changes) {
+  hydrationCalculator.update($.extend(changes, {"hydrationLock": hydrationIsLocked()}));
+  $('#result').text(hydrationCalculator.hydration());
+  $("#info-result").text(hydrationCalculator.hydration());
+  $('#dough-weight').text(hydrationCalculator.weight());
+  $('#salt-weight').text(hydrationCalculator.recommendedSalt());
+  $('#starter-percent').text(hydrationCalculator.percentStarter());
 }
 
-function calculateAndSetHydrationAndWeight() {
-  calculateAndSetHydration();
-  $('#dough-weight').text(calculator().calculateWeight());
+function hydrationIsLocked() {
+  return !$('#lock').hasClass("hydrationUnlocked");
+}
+
+function toggleLock() {
+  $('#lock').toggleClass("hydrationUnlocked");
+  $("#hydration").resizable( "option", "disabled", hydrationIsLocked() );
+  $("#starter").resizable( "option", "disabled", hydrationIsLocked() );
 }
 
 function resizeableParams(updateCallback){ 

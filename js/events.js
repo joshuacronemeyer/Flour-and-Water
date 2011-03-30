@@ -18,7 +18,9 @@
 // https://github.com/joshuacronemeyer/Flour-and-Water
 
 $(function() {
+  resetCalculator();
   setTweetText();
+  $("#lock").click(toggleLock);
   $("#info").click(function(){$("#overlay").show();});
   $("#overlay").click(function(){
     if ($("#overlay").not(":visible")) {

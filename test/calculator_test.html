@@ -85,8 +85,8 @@
       });
 
       test("recommended salt", function() {
-              var calc = new HydrationCalculator(500, 363, 250, 72);
-              equals(calc.recommendedSalt(), 12, "We expect 12 grams" );
+        var calc = new HydrationCalculator(500, 363, 250, 72);
+        equals(calc.recommendedSalt(), 12, "We expect 12 grams" );
       });
       
       test("percent starter", function() {

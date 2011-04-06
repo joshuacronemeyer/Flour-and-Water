@@ -43,10 +43,17 @@
       });
       
       test("theStarterHydrationChanged method updates the starterHydration and hydration", function(){
-        $("#hydration").width(200);
+        $("#hydration").width(80);
         theStarterHydrationChanged();
-        equals($("#starter-hydration").text(), "80");
-        equals($("#result").text(), "93");
+        equals($("#starter-hydration").text(), "64");
+        equals($("#result").text(), "86");
+      });
+      
+      test("starter hydration goes up to 200%", function(){
+        $("#starter").width(200);
+        $("#hydration").width(200);
+        theStarterChanged();
+        equals($("#starter-hydration").text(), "200");
       });
       
       test("setTweetText updates the tweet text with new hydration calculation", function(){
@@ -89,7 +96,7 @@
     <span id="water" style="width: 250px"></span>
     <span id="starter-size">250</span>
     <span id="starter" style="width: 250px"></span>
-    <span id="hydration" style="width: 250px"></span>
+    <span id="hydration" style="width: 125px"></span>
     <span id="starter-hydration">100</span>
     <span id="result">0</span>
     <span id="dough-weight">750</span>

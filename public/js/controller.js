@@ -72,7 +72,7 @@ function theStarterChanged() {
 }
 
 function theStarterHydrationChanged(){
-  var percentHydration = parseInt(($('#hydration').width() / $('#starter').width())*100)
+  var percentHydration = parseInt(2*($('#hydration').width() / $('#starter').width())*100)
   $('#starter-hydration').text(percentHydration);
   calculateAndSetHydrationAndWeight({"starterHydration": percentHydration});
 }

@@ -27,8 +27,6 @@ function HydrationCalculator(flour, water, starter, starterHydration) {
 
 HydrationCalculator.prototype.update = function(changes) {
   if (changes.hydrationLock != undefined) { this.hydrationLock = changes.hydrationLock; }
-  // var originalThis = jQuery.extend({}, this);
-  //   this._updateAllQuantities(changes);
   if (this.hydrationLock) {
     this._compensateToMaintainHydration(changes);
   } else {
@@ -92,12 +90,7 @@ HydrationCalculator.prototype._compensateToMaintainHydration = function(changes)
 }
 
 HydrationCalculator.prototype._balanceFlour = function(calculatedHydration){
-  console.log(this);
-  console.log(calculatedHydration);
-  console.log(this.starterWater());
-  console.log(this.starterFlour());
   this.flour = this._round(((this.water + this.starterWater())/(calculatedHydration/100)) - this.starterFlour());
-  console.log(this.flour);
 }
     
 HydrationCalculator.prototype._balanceWater = function(calculatedHydration){

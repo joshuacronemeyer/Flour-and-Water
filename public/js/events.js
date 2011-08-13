@@ -50,7 +50,6 @@ function init()
 
 
 $(function() {
-  init();
   resetCalculator();
   setTweetText();
   $("#lock").click(toggleLock);
@@ -64,4 +63,5 @@ $(function() {
   $("#water").resizable(resizeableParams(theWaterChanged));
   $("#starter").resizable($.extend(resizeableParams(theStarterChanged), {alsoResize: "#hydration"}));
 	$("#hydration").resizable($.extend(resizeableParams(theStarterHydrationChanged), {containment: "#starter"}));
+  init();
 });

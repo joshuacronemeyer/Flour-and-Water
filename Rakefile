@@ -7,11 +7,13 @@ CLEAN.include('tmp', 'pkg')
 
 task :default => :test
 
+desc "big money no whammies!"
 task :test do |t|
   test_files = FileList['test/*test*.html']
   test_files.each{|file| `open #{file}`}
 end
 
+desc "to the batcave!"
 task :deploy do |t|
   `git checkout master`
   `git pull origin master`
@@ -28,6 +30,7 @@ task :deploy do |t|
   `git checkout master`
 end
 
+desc "to the google cave!"
 task :chrome_package => [:clean, :package]
 
 Rake::PackageTask.new("Hydration", "0.1") do |p|

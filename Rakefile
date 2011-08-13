@@ -15,19 +15,15 @@ end
 
 desc "to the batcave!"
 task :deploy do |t|
-  `git checkout master`
-  `git pull origin master`
-  `mkdir tmp`
-  `cp -r public/ tmp`
-  `git checkout gh-pages`
-  `git pull origin gh-pages`
-  FileList["**/*"].exclude("tmp").each {|file| `rm -rf #{file}`}
-  `cp -r tmp/* .`
-  `rm -rf tmp`
-  `git add .`
-  `git ci -m "deploy latest changes"`
-  `git push origin gh-pages`
-  `git checkout master`
+  command_list = ["git checkout master", "git pull origin master", "mkdir tmp",
+    "cp -r public/ tmp", "git checkout gh-pages", "git pull origin gh-pages",
+    lambda{ FileList["**/*"].exclude("tmp").collect {|file| "rm -rf #{file}"}},
+    "cp -r tmp/* .", "rm -rf tmp", "git add .", "git ci -m 'deploy latest changes'", 
+    "git push origin gh-pages", "git checkout master"]
+  expanded_command_list = command_list.collect do |command|
+    command.is_a?(Proc) ? command.call : command
+  end
+  system expanded_command_list.flatten.join(" && ")
 end
 
 desc "to the google cave!"

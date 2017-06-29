@@ -1,0 +1,14 @@
+{
+  "name": "Hydration",
+  "description": "A hydration calculator for naturally leavened bread.",
+  "version": "0.1",
+  "app": {
+    "launch": {
+      "local_path": "public/index.html"
+    }
+  },
+  "icons": {
+    "16": "public/images/flour_water16.ico",
+    "128": "public/images/flour_water128.ico"
+  }
+}

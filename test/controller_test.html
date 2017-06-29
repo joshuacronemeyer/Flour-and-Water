@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script src="../public/js/jquery-1.4.4.min.js"></script>
+  <script src="../public/js/jquery-ui-1.8.9.custom.min.js"></script>
+  <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="qunit.js"></script>
+  <script type="text/javascript" src="../public/js/hydration_calculator.js"></script>
+  <script type="text/javascript" src="../public/js/controller.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $("#starter").resizable({maxHeight: 80,minHeight: 80});
+      $("#hydration").resizable({maxHeight: 80, minHeight: 80, resize: function(){}});
+      module( "setup calculator global", {setup: function() { resetCalculator(); }});
+
+      test("theWaterChanged method updates the water, weight and hydration", function(){
+        $("#water").width(200);
+        theWaterChanged();
+        equals($("#water-size").text(), "200");
+        equals($("#dough-weight").text(), "700");
+        equals($("#result").text(), "87");
+      });
+      
+      test("theFlourChanged method updates the flour, weight and hydration", function(){
+        $("#flour").width(300);
+        theFlourChanged();
+        equals($("#flour-size").text(), "300");
+        equals($("#dough-weight").text(), "800");
+        equals($("#result").text(), "88");
+      });
+      
+      test("theStarterChanged method updates the starter, starterHydration, weight and hydration", function(){
+        $("#starter").width(300);
+        theStarterChanged();
+        equals($("#starter-size").text(), "300");
+        equals($("#starter-hydration").text(), "83");
+        equals($("#dough-weight").text(), "800");
+        equals($("#salt-weight").text(), "9");
+        equals($("#starter-percent").text(), "38");
+        equals($("#result").text(), "93");
+      });
+      
+      test("theStarterHydrationChanged method updates the starterHydration and hydration", function(){
+        $("#hydration").width(80);
+        theStarterHydrationChanged();
+        equals($("#starter-hydration").text(), "64");
+        equals($("#result").text(), "86");
+      });
+      
+      test("starter hydration goes up to 200%", function(){
+        $("#starter").width(200);
+        $("#hydration").width(200);
+        theStarterChanged();
+        equals($("#starter-hydration").text(), "200");
+      });
+      
+      test("setTweetText updates the tweet text with new hydration calculation", function(){
+        theStarterHydrationChanged(); //initially calculate hydration...
+        setTweetText();
+        var expectedText = encodeURIComponent("My sourdough is 100% hydration exactly! I calculated it with this:");
+        equals($("iframe").attr("src").indexOf(expectedText) > -1, true, "We expect the tweet text to match this url");
+      });
+      
+      test("toggleLock updates lock element", function(){
+        equals($("#lock").hasClass("hydrationUnlocked"), true);
+        toggleLock();
+        equals($("#lock").hasClass("hydrationUnlocked"), false);
+        equals(hydrationIsLocked(), true);
+      });
+      
+      test("adding flour updates water but not hydration when locked", function(){
+        toggleLock();
+        $("#flour").width(300);
+        theFlourChanged();
+        equals($("#flour-size").text(), 300);
+        equals($("#water-size").text(), 300);
+        equals($("#result").text(), "100");
+      });
+    });
+  </script> 
+</head>
+
+<body>
+  <h1 id="qunit-header">Controller Test</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+    <span id="lock" class="hydrationUnlocked"></span>
+    <span id="flour-size">250</span>
+    <span id="flour" style="width: 250px"></span>
+    <span id="water-size">250</span>
+    <span id="water" style="width: 250px"></span>
+    <span id="starter-size">250</span>
+    <span id="starter" style="width: 250px"></span>
+    <span id="hydration" style="width: 125px"></span>
+    <span id="starter-hydration">100</span>
+    <span id="result">0</span>
+    <span id="dough-weight">750</span>
+    <span id="salt-weight">0</span>
+    <span id="starter-percent">0</span>
+    <iframe src=""></iframe>
+  </div>
+</body>
+</html>

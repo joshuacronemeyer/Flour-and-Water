@@ -18,8 +18,24 @@
 // https://github.com/joshuacronemeyer/Flour-and-Water
 
 $(function() {
+  var updateBar = function(e){
+     $(e.gesture.target).width(e.gesture.center.x);
+     theFlourChanged();
+     theWaterChanged();
+     theStarterChanged();
+     theStarterHydrationChanged();
+  };
+
+  var flour = $("#flour");
+  var water = $("#water");
+  var starter = $("#starter");
+  var hydration = $("#hydration");
+  flour.hammer().bind("pan", updateBar);
+  water.hammer().bind("pan", updateBar);
+  starter.hammer().bind("pan", updateBar);
+  hydration.hammer().bind("pan", updateBar);
+
   resetCalculator();
-  setTweetText();
   $("#lock").click(toggleLock);
   $("#info").click(function(){$("#overlay").show();});
   $("#overlay").click(function(){
@@ -27,8 +43,4 @@ $(function() {
       $("#overlay").hide();
     }
   });
-  $("#flour").resizable(resizeableParams(theFlourChanged));
-  $("#water").resizable(resizeableParams(theWaterChanged));
-  $("#starter").resizable($.extend(resizeableParams(theStarterChanged), {alsoResize: "#hydration"}));
-	$("#hydration").resizable($.extend(resizeableParams(theStarterHydrationChanged), {containment: "#starter"}));
 });

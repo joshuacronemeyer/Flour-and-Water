@@ -36,14 +36,6 @@ function resetCalculator(){
     );
 }
 
-baseTwitterIframeSRC = "http://platform0.twitter.com/widgets/tweet_button.html?_=1298156795174&count=vertical&lang=en&url=http%3A%2F%2Fjoshuacronemeyer.github.com%2FFlour-and-Water&via=MakingLoaf"
-function setTweetText(){
-  var hydration = $("#result").text();
-  var tweetText = "My sourdough is " + hydration + "% hydration exactly! I calculated it with this:";
-  var encodedTweetText = "&text=" + encodeURIComponent(tweetText);
-  $("iframe").attr("src", baseTwitterIframeSRC + encodedTweetText);
-}
-
 function theWaterChanged() {
   var water =  $("#water").width();
   $("#water-size").text(water);
@@ -94,13 +86,4 @@ function toggleLock() {
   $('#lock').toggleClass("hydrationUnlocked");
   $("#hydration").resizable( "option", "disabled", hydrationIsLocked() );
   $("#starter").resizable( "option", "disabled", hydrationIsLocked() );
-}
-
-function resizeableParams(updateCallback){ 
-  return {
-    maxHeight: 80,
-	  minHeight: 80,
-	  resize: updateCallback,
-	  stop: setTweetText
-  }
 }

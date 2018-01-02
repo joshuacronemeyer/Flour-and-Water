@@ -59,8 +59,11 @@ function theFlourChanged() {
 function theStarterChanged() { 
   var starter =  $("#starter").width();
   $("#starter-size").text(starter);
-  theStarterHydrationChanged();
   calculateAndSetHydrationAndWeight({"starter": starter});
+
+  if($('#starter').width() <  $('#hydration').width()) {
+    $('#hydration').width($('#starter').width())
+  }
 }
 
 function theStarterHydrationChanged(){

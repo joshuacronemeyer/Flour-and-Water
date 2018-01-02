@@ -17,28 +17,44 @@
 // For more information please visit the project on github: 
 // https://github.com/joshuacronemeyer/Flour-and-Water
 
-$(function() {
-  var updateBar = function(e){
-     $(e.gesture.target).width(e.gesture.center.x);
-     theFlourChanged();
-     theWaterChanged();
-     theStarterChanged();
-     theStarterHydrationChanged();
+$(function () {
+  var panningCurrent = null;
+
+  var updateBar = function (e) {
+    $(panningCurrent).width(e.gesture.center.x);
+    theFlourChanged();
+    theWaterChanged();
+    theStarterChanged();
+    theStarterHydrationChanged();
+  };
+
+  var panStart = function (e) {
+    panningCurrent = e.gesture.target;
   };
 
   var flour = $("#flour");
   var water = $("#water");
   var starter = $("#starter");
   var hydration = $("#hydration");
-  flour.hammer().bind("pan", updateBar);
-  water.hammer().bind("pan", updateBar);
-  starter.hammer().bind("pan", updateBar);
-  hydration.hammer().bind("pan", updateBar);
+
+  flour.hammer().bind("panstart", panStart);
+  flour.hammer().bind("panmove", updateBar);
+
+  water.hammer().bind("panstart", panStart);
+  water.hammer().bind("panmove", updateBar);
+
+  starter.hammer().bind("panstart", panStart);
+  starter.hammer().bind("panmove", updateBar);
+
+  hydration.hammer().bind("panstart", panStart);
+  hydration.hammer().bind("panmove", updateBar);
 
   resetCalculator();
   $("#lock").click(toggleLock);
-  $("#info").click(function(){$("#overlay").show();});
-  $("#overlay").click(function(){
+  $("#info").click(function () {
+    $("#overlay").show();
+  });
+  $("#overlay").click(function () {
     if ($("#overlay").not(":visible")) {
       $("#overlay").hide();
     }

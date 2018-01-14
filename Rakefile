@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'ftools'
 require 'rake/clean'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 
 CLEAN.include('tmp', 'pkg')
 
@@ -29,7 +29,7 @@ end
 desc "to the google cave!"
 task :chrome_package => [:clean, :package]
 
-Rake::PackageTask.new("Hydration", "0.1") do |p|
+Rake::PackageTask.new("Hydration", "1.1") do |p|
   p.need_zip = true
   p.package_files.include("public/**/*")
   p.package_files.include("manifest.json")

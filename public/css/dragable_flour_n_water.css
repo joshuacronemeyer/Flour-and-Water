@@ -99,11 +99,7 @@ html, body {
   font-size: 40px;
 }
 
-.heading {
-  pointer-events: none;
-}
-
-.quantity {
+.heading, .quantity, .unit, .quality {
   pointer-events: none;
 }
 

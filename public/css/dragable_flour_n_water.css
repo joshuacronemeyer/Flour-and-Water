@@ -15,9 +15,9 @@ html, body {
   margin: 0 auto -100px;
 }
 
-.foot, 
+.foot,
 .push {
-  height: 100px;   
+  height: 100px;
 }
 
 .foot {
@@ -89,14 +89,18 @@ html, body {
   filter:alpha(opacity=10);
 }
 
-.sub_resizable { 
+.sub_resizable {
   border-right: 1px solid black;
-  width: 180px; 
+  width: 180px;
   height:80px;
 }
 
 .quantity, .quality{
   font-size: 40px;
+}
+
+.heading, .quantity, .unit, .quality {
+  pointer-events: none;
 }
 
 .unit, .heading {
